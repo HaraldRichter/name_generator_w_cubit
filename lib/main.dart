@@ -5,7 +5,7 @@ import 'dart:math' as math show Random;
 void main() {
   runApp(
     MaterialApp(
-      title: 'Random Name Picker',
+      title: 'Random Name Generator',
       theme: ThemeData(primarySwatch: Colors.teal),
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
@@ -30,7 +30,7 @@ class NamesCubit extends Cubit<String?> {
   // for a random name first.
   NamesCubit() : super(null);
 
-  // "emit" is the way to go to produce new values for Cubit and Bloc:
+  // "emit" is how we produce new values for Cubit and Bloc:
   void pickRandomName() => emit(
         names.getRandomElement(),
       );
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('Name Generator'),
       ),
       body: StreamBuilder<String?>(
         stream: cubit.stream,
@@ -81,9 +81,10 @@ class _HomePageState extends State<HomePage> {
               return button;
             case ConnectionState.active:
               return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(snapshot.data ?? ''),
-                  button,
+                  Center(child: button),
                 ],
               );
               break;
